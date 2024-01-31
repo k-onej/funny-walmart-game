@@ -21,7 +21,7 @@ sources/0 = SubResource("TileSetScenesCollectionSource_b8bkv")
 
 [node name="Player" parent="." instance=ExtResource("1_suygq")]
 z_index = 1
-position = Vector2(224, 384)
+position = Vector2(48, 528)
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="."]
 position = Vector2(-3, 676)
@@ -59,7 +59,7 @@ scale = Vector2(0.5, 0.5)
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_eyk8p")
 format = 2
-layer_0/tile_data = PackedInt32Array(1048592, 0, 65536, 1048593, 0, 65536, 1048594, 0, 65536, 1048595, 0, 65536, 1048596, 0, 65536, 2162711, 0, 65536, 2162712, 0, 65536, 2162713, 0, 65536, 2162714, 0, 65536, 2162715, 0, 65536)
+layer_0/tile_data = PackedInt32Array(2162711, 0, 65536, 2162712, 0, 65536, 2162713, 0, 65536, 2162714, 0, 65536, 2162715, 0, 65536, 2162696, 0, 65536, 2162697, 0, 65536, 2162698, 0, 65536, 2162699, 0, 65536, 2162700, 0, 65536, 983055, 0, 65536, 983056, 0, 65536, 983057, 0, 65536, 983058, 0, 65536, 983059, 0, 65536)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(288, 384)

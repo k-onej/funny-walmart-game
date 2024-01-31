@@ -12,7 +12,6 @@ extends CharacterBody2D
 @onready var sprite = $Sprite
 
 func _physics_process(delta):
-	
 	if up_direction == Vector2.UP:
 		sprite.flip_v = false
 	elif up_direction == Vector2.DOWN:
@@ -53,6 +52,7 @@ func _physics_process(delta):
 func die():
 	position = spawn_position
 	set_up_direction(Vector2.UP)
+	velocity = Vector2(0, 0)
 	
 func set_spawn(x:float = position.x, y:float = position.y):
 	spawn_position = Vector2(x, y)
