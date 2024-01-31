@@ -13,4 +13,4 @@ func _process(delta):
 
 func _on_body_entered(body):
 	if body.name == "Player":
-		body.spawn_position = body.position
+		body.set_spawn()

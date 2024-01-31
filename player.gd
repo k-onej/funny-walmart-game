@@ -41,3 +41,6 @@ func _physics_process(delta):
 func die():
 	position = spawn_position
 	set_up_direction(Vector2.UP)
+	
+func set_spawn():
+	spawn_position = position
