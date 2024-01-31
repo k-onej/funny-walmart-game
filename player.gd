@@ -1,27 +1,30 @@
 extends CharacterBody2D
 
 
-@export var max_speed := 1000
-@export var accel := 300
-@export var decel := 0.4
-@export var gravity := 70000
-@export var max_fall_speed := 120000
+@export var max_speed := 500
+@export var accel := 150
+@export var decel := 0.2
+@export var gravity := 35000
+@export var max_fall_speed := 60000
 
 @onready var spawn_position = position
 
-@onready var sprite = $Sprite2D
+@onready var sprite = $Sprite
 
 func _physics_process(delta):
-	print(velocity.x)
+	
+	if up_direction == Vector2.UP:
+		sprite.flip_v = false
+	elif up_direction == Vector2.DOWN:
+		sprite.flip_v = true
+	
 	# Add the gravity, gravity direction changes based on up direction
 	# BUG: player slides slowly and is_on_floor() returns true when switching gravity while moving against wall
 	if not is_on_floor():
 		if up_direction == Vector2.UP:
 			velocity.y = min(velocity.y + gravity * delta, max_fall_speed * delta)
-			sprite.flip_v = false
 		if up_direction == Vector2.DOWN:
 			velocity.y = max(velocity.y - gravity * delta, -max_fall_speed * delta)
-			sprite.flip_v = true
 
 	# Handle switching gravity.
 	if Input.is_action_just_pressed("switch_gravity") and is_on_floor():
@@ -36,11 +39,14 @@ func _physics_process(delta):
 	if direction > 0:
 		velocity.x = min(velocity.x + accel * direction, max_speed)
 		sprite.flip_h = false
+		sprite.play("run")
 	elif direction < 0:
 		velocity.x = max(velocity.x + accel * direction, -max_speed)
 		sprite.flip_h = true
+		sprite.play("run") # rahhh redundant code but im too lazy to make it not that way -w-
 	else:
 		velocity.x = lerp(velocity.x, 0.0, decel)
+		sprite.play("idle")
 	
 	move_and_slide()
 	
