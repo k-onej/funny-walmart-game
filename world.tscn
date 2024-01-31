@@ -1,7 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://c7r1hf834hmg4"]
+[gd_scene load_steps=8 format=3 uid="uid://c7r1hf834hmg4"]
 
 [ext_resource type="PackedScene" uid="uid://d2jllfuprfbjr" path="res://player.tscn" id="1_suygq"]
-[ext_resource type="PackedScene" uid="uid://bxpodv6m4xg0" path="res://spike.tscn" id="2_ky0eo"]
+[ext_resource type="PackedScene" uid="uid://bxpodv6m4xg0" path="res://kill_zone.tscn" id="2_ky0eo"]
 [ext_resource type="PackedScene" uid="uid://cq5gonl6nb2gj" path="res://spawn_point.tscn" id="3_48hc7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_80ep6"]
@@ -9,6 +9,14 @@ size = Vector2(1289, 141)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w1sjs"]
 size = Vector2(1361, 739)
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_b8bkv"]
+resource_name = "Kill Zone"
+scenes/1/scene = ExtResource("2_ky0eo")
+
+[sub_resource type="TileSet" id="TileSet_eyk8p"]
+tile_size = Vector2i(32, 32)
+sources/0 = SubResource("TileSetScenesCollectionSource_b8bkv")
 
 [node name="World" type="Node2D"]
 
@@ -31,8 +39,39 @@ position = Vector2(-68, -600)
 position = Vector2(710, 280)
 shape = SubResource("RectangleShape2D_w1sjs")
 
-[node name="Spike" parent="." instance=ExtResource("2_ky0eo")]
-position = Vector2(704, 528)
+[node name="StaticBody2D4" type="StaticBody2D" parent="."]
+position = Vector2(-68, -600)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
+position = Vector2(-628, 936)
+shape = SubResource("RectangleShape2D_w1sjs")
+
+[node name="StaticBody2D5" type="StaticBody2D" parent="."]
+position = Vector2(-68, -600)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D5"]
+position = Vector2(1916, 928)
+shape = SubResource("RectangleShape2D_w1sjs")
 
 [node name="SpawnPoint" parent="." instance=ExtResource("3_48hc7")]
 position = Vector2(928, 480)
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_eyk8p")
+format = 2
+layer_0/tile_data = PackedInt32Array(1048586, 0, 65536, 1048587, 0, 65536, 1048588, 0, 65536, 1048589, 0, 65536, 1048590, 0, 65536, 1048591, 0, 65536, 1048592, 0, 65536, 65554, 0, 65536, 65555, 0, 65536, 65556, 0, 65536, 65557, 0, 65536, 65558, 0, 65536, 65559, 0, 65536, 65560, 0, 65536)
+
+[connection signal="body_entered" from="TileMap/@Area2D@57616" to="TileMap/@Area2D@57616" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@57617" to="TileMap/@Area2D@57617" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@57618" to="TileMap/@Area2D@57618" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@57619" to="TileMap/@Area2D@57619" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@57620" to="TileMap/@Area2D@57620" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@57621" to="TileMap/@Area2D@57621" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@57622" to="TileMap/@Area2D@57622" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@57623" to="TileMap/@Area2D@57623" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@57624" to="TileMap/@Area2D@57624" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@57625" to="TileMap/@Area2D@57625" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@57626" to="TileMap/@Area2D@57626" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@57627" to="TileMap/@Area2D@57627" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@57628" to="TileMap/@Area2D@57628" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@57629" to="TileMap/@Area2D@57629" method="_on_body_entered"]

@@ -1,3 +1,6 @@
+# AWESOME DEVELOPER NOTE TO SELF: THE THING WHERE YOU CAN SLIDE ON WALLS IS INTENTIONAL.
+# I AM SURE THERE IS AN EASY FIX FOR IT BUT I THINK IT'S COOL SO IDC. :3
+
 extends CharacterBody2D
 
 
@@ -16,8 +19,8 @@ func _physics_process(delta):
 		if up_direction == Vector2.DOWN:
 			velocity.y = max(velocity.y - gravity * delta, -max_fall_speed * delta)
 
-	# Handle jump.
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+	# Handle switching gravity.
+	if Input.is_action_just_pressed("switch_gravity") and is_on_floor():
 		if up_direction == Vector2.UP:
 			set_up_direction(Vector2.DOWN)
 		elif up_direction == Vector2.DOWN:
@@ -25,16 +28,11 @@ func _physics_process(delta):
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
-	var direction = Input.get_axis("ui_left", "ui_right")
+	var direction = Input.get_axis("move_left", "move_right")
 	if direction:
 		velocity.x = direction * speed
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed)
-
-	if Input.is_action_just_pressed("ui_cancel"):
-		die()
-	if Input.is_action_just_pressed("ui_focus_next"):
-		spawn_position = position
 	
 	move_and_slide()
 	
@@ -42,5 +40,5 @@ func die():
 	position = spawn_position
 	set_up_direction(Vector2.UP)
 	
-func set_spawn():
-	spawn_position = position
+func set_spawn(x:float = position.x, y:float = position.y):
+	spawn_position = Vector2(x, y)
