@@ -7,21 +7,21 @@ extends CharacterBody2D
 @export var gravity := 5000
 @export var max_fall_speed := 60000
 
-var has_maxwell = false
-
-@onready var spawn_position = position
+@onready var spawn_position := position
 
 @onready var sprite = $AnimatedSprite2D
 
+@onready var player_globals = $"/root/PlayerGlobals"
+
 
 func _physics_process(delta):
+	print(player_globals.has_maxwell)
 	if up_direction == Vector2.UP:
 		sprite.flip_v = false
 	elif up_direction == Vector2.DOWN:
 		sprite.flip_v = true
 	
 	# Add the gravity, gravity direction changes based on up direction
-	# BUG: player slides slowly and is_on_floor() returns true when switching gravity while moving against wall
 	if not is_on_floor():
 		if up_direction == Vector2.UP:
 			velocity.y = min(velocity.y + gravity * delta, max_fall_speed * delta)
@@ -32,16 +32,18 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("switch_gravity") and is_on_floor():
 		if up_direction == Vector2.UP:
 			set_up_direction(Vector2.DOWN)
+			velocity.y = 1
 		elif up_direction == Vector2.DOWN:
 			set_up_direction(Vector2.UP)
+			velocity.y = -1
 
 	var direction = Input.get_axis("move_left", "move_right")
 	if direction > 0:
-		velocity.x = min(velocity.x + accel * direction, max_speed)
+		velocity.x = min(velocity.x + accel * direction, max_speed * direction)
 		sprite.flip_h = false
 		sprite.play("run")
 	elif direction < 0:
-		velocity.x = max(velocity.x + accel * direction, -max_speed)
+		velocity.x = max(velocity.x + accel * direction, max_speed * direction)
 		sprite.flip_h = true
 		sprite.play("run")
 	else:

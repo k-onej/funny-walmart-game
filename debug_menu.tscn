@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://cyy3fe7beq1t2"]
+
+[sub_resource type="GDScript" id="GDScript_swqj4"]
+script/source = "extends CanvasLayer
+
+
+@onready var player = get_node(\"res://Player\")
+
+func _process(delta):
+	print(player)
+"
+
+[node name="DebugMenu" type="CanvasLayer"]
+script = SubResource("GDScript_swqj4")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PlayerInfo" type="Label" parent="Control"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
